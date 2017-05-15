@@ -1,0 +1,344 @@
+﻿@{
+    ViewBag.Title = "Check_Out";
+}
+@using Resturant.Models;
+<nav class="navbar navbar-inverse navbar-fixed-top nav-small">
+    <div class="container-fluid">
+        <div class="navbar-header"> <a class="navbar-brand" href="/Home/"><img src="~/Content/images/logo.png" alt=""></a> </div>
+        <div class="order-now-top-button"> <a href="/Home/">Home</a> </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container  mw900 mt70 pt140">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="mb30">REVIEW YOUR ORDER & CHECKOUT</h2>
+            <p class="mb30">Please enter your info below or <a href="/Home/Login">log into an existing account.</a></p>
+            <div class="row">
+                <div class="col-sm-7">
+
+
+                    @{
+
+
+    if (System.Web.HttpContext.Current.Session["LoginCustomer"] == null)
+    {
+        <form id="checkout" method="post" action="payment">
+
+            <h3>PICK-UP DETAILS</h3>
+            <div class="form-group mb30">
+                <input type="text" name="first_name" id="signup-first-name" class="form-control" placeholder="first name" value="" required>
+            </div>
+            <div class="form-group mb30">
+                <input type="text" name="last_name" id="signup-last-name" class="form-control" placeholder="last name" value="" required>
+            </div>
+            <div class="form-group mb30">
+                <input type="email" name="email" id="signup-email" class="form-control" placeholder="email address" value="" required>
+                <span class="text-muted">This is where your confirmation email / receipt will be sent.</span>
+            </div>
+            <div class="form-group mb30">
+                <input type="email" name="email_confirm" id="signup-email-confirm" class="form-control" placeholder="confirm email address" value="" required>
+                <span class="text-muted">Sorry to ask for this twice, but this is an important one.</span>
+            </div>
+            <div class="form-group mb30">
+                <input type="text" name="PhoneNumber" id="signup-email-confirm" class="form-control" placeholder="phone number" value="" required>
+                <span class="text-muted">Such as 123-456-7890 x123. Just in case we need to get in touch for any reason.</span>
+            </div>
+            <div class="form-group mb30">
+                <input type="Address" name="Address" id="signup-email-confirm" class="form-control" placeholder=" address" value="" required>
+                <span class="text-muted">You already gave us this one! <a href="#">Click here</a> if you need to make any changes.</span>
+            </div>
+            <div class="form-group mb30">
+                <input type="email" name="PostCode" id="signup-email-confirm" class="form-control" placeholder="PostCode" value="" required>
+            </div>
+            <div class="form-group mb30">
+                <input type="email" name="email_confirm" id="signup-email-confirm" class="form-control" placeholder="company" value="" required>
+                <span class="text-muted">Optional, but this tends to be very helpful, especially if you're ordering from work.</span>
+            </div>
+            <div class="form-group mb30">
+                <textarea class="form-control" name="Instructions" rows="3" cols="5" placeholder=" delivery instructions"></textarea>
+            </div>
+            <h3>WANNA CREATE AN ACCOUNT?</h3>
+            <p>Simply enter a password. Creating an account allows us to save your address, credit card info, and detailed order history (for quick & easy re-ordering). </p>
+            <div class="form-group mb30">
+                <input type="password" name="password" id="signup-password" class="form-control" placeholder="password" value="" required>
+                <span class="text-muted">Passwords are case sensitive and must be at least 8 letters or numbers.</span>
+            </div>
+          
+
+
+
+                <div id="payment-form"></div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group mb30">
+                            <button id="submit-button" class="btn btn-primary" type="submit" data-modal="modal-updating" value="">Submit Your Order</button>
+                        </div>
+                    </div>
+                </div>
+        
+            <input type="hidden" value="ASAP" name="time" id="timeSelect" />
+
+        </form>
+
+    }
+    else
+    {
+                      <form id="checkout" method="post" action="payment">
+                        @{
+                            Customer cus = (Customer)System.Web.HttpContext.Current.Session["LoginCustomer"];
+                            
+                            }
+                        <input type="hidden" name="id" value="@cus.Id" />
+                        <h3>PICK-UP DETAILS</h3>
+                        <div class="form-group mb30">
+                            <input type="text" name="FirstName" id="signup-first-name" class="form-control" placeholder="first name" value="@cus.FirstName" required>
+                        </div>
+                        <div class="form-group mb30">
+                            <input type="text" name="last_name" id="signup-last-name" class="form-control" placeholder="last name" value="@cus.LastName" required>
+                        </div>
+                        <div class="form-group mb30">
+                            <input type="email" name="email" id="signup-email" class="form-control" placeholder="email address" value="@cus.Email" required>
+                            <span class="text-muted">This is where your confirmation email / receipt will be sent.</span>
+                        </div>
+
+                        <div class="form-group mb30">
+                            <input type="text" name="PhoneNumber" id="signup-email-confirm" class="form-control" placeholder="phone number" value="@cus.PhoneNumber" required>
+                                <span class="text-muted">Such as 123-456-7890 x123. Just in case we need to get in touch for any reason.</span>
+</div>
+                        <div class="form-group mb30">
+                            <input type="text" name="Address" id="signup-email-confirm" class="form-control" placeholder=" address" value="@cus.Address" required>
+                            <span class="text-muted">You already gave us this one! <a href="#">Click here</a> if you need to make any changes.</span>
+                        </div>
+
+                        <div class="form-group mb30">
+                            <input type="text" name="PostCode" id="signup-email-confirm" class="form-control" placeholder="PostCode" value="" required>
+                        </div>
+                        <div class="form-group mb30">
+                            <input type="email" name="email_confirm" id="signup-email-confirm" class="form-control" placeholder="company" value="" required>
+                            <span class="text-muted">Optional, but this tends to be very helpful, especially if you're ordering from work.</span>
+                        </div>
+                        <div class="form-group mb30">
+                            <textarea class="form-control" name="Instructions" rows="3" cols="5" placeholder=" delivery instructions"></textarea>
+                        </div>
+                      
+
+                          <input type="password" name="password" id="signup-password" class="form-control" placeholder="password" hidden>
+
+                           <div id="payment-form"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group mb30">
+                                    <button id="submit-button" class="btn btn-primary" type="submit" data-modal="modal-updating" value="">Submit Your Order</button>
+                                </div>
+                            </div>
+                        </div>
+                          <input type="hidden" value="ASAP" name="time" id="timeSelect" />
+                    </form>
+
+
+                    }
+
+     
+                        
+                     
+                        
+
+                    }
+
+
+                 
+
+
+
+
+               
+                </div>
+                <div class="col-sm-5">
+                    <h3 class="sb-title">ORDER SUMMARY</h3>
+                    <table class="table table-hover ">
+                        <tbody>
+                            <tr>
+                                <td>LOCATION</td>
+                                <td class="text-right"><a href="#">Hell's Kitchen</a></td>
+                            </tr>
+                            <tr>
+                                <td>ORDER TYPE</td>
+                                <td class="text-right">Pick-Up</td>
+                            </tr>
+                            <tr>
+                                <td>PICK-UP TIME</td>
+                                <td class="text-right">
+                                    <select class="form-control h20" onchange="onChange()" id="select_id">
+                                        <option value="asap">ASAP</option>
+                                        <option disabled="">Lunch &amp; Dinner</option>
+                                        <option value="14:45:00">2:45 PM</option>
+                                        <option value="15:00:00">3:00 PM</option>
+                                        <option value="15:15:00">3:15 PM</option>
+                                        <option value="15:30:00">3:30 PM</option>
+                                        <option value="15:45:00">3:45 PM</option>
+                                        <option value="16:00:00">4:00 PM</option>
+                                        <option value="16:15:00">4:15 PM</option>
+                                        <option value="16:30:00">4:30 PM</option>
+                                        <option value="16:45:00">4:45 PM</option>
+                                        <option value="17:00:00">5:00 PM</option>
+                                        <option value="17:15:00">5:15 PM</option>
+                                        <option value="17:30:00">5:30 PM</option>
+                                        <option value="17:45:00">5:45 PM</option>
+                                        <option value="18:00:00">6:00 PM</option>
+                                        <option value="18:15:00">6:15 PM</option>
+                                        <option value="18:30:00">6:30 PM</option>
+                                        <option value="18:45:00">6:45 PM</option>
+                                        <option value="19:00:00">7:00 PM</option>
+                                        <option value="19:15:00">7:15 PM</option>
+                                        <option value="19:30:00">7:30 PM</option>
+                                        <option value="19:45:00">7:45 PM</option>
+                                        <option value="20:00:00">8:00 PM</option>
+                                        <option value="20:15:00">8:15 PM</option>
+                                        <option value="20:30:00">8:30 PM</option>
+                                        <option value="20:45:00">8:45 PM</option>
+                                        <option value="21:00:00">9:00 PM</option>
+                                        <option value="21:15:00">9:15 PM</option>
+                                        <option value="21:30:00">9:30 PM</option>
+                                        <option value="21:45:00">9:45 PM</option>
+                                        <option value="22:00:00">10:00 PM</option>
+                                        <option value="22:15:00">10:15 PM</option>
+                                        <option value="22:30:00">10:30 PM</option>
+                                        <option value="22:45:00">10:45 PM</option>
+                                        <option value="23:00:00">11:00 PM</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <h4 class="text-danger text-center">Current wait is 15 minutes</h4>
+
+                    @{
+                        double total = 0;
+                        double subtotal = 0;
+                    }
+                    @foreach (Items Items in Model)
+                    {
+                        subtotal = subtotal + Items.Quantitity * Items.price;
+                        total = subtotal;
+                    }
+
+
+                    <table class="table table-hover ">
+                        <tbody>
+                            <tr>
+                                <td>ORDER TOTAL</td>
+                                <td class="text-right">$ @subtotal</td>
+                            </tr>
+                           
+
+                            @foreach(ExtraCharge extra in  @ViewBag.extracharges)
+                            {
+                                //if (extra.Minimum_Amount>subtotal || extra.Maximum_Amount<subtotal)
+                                {
+                                    total += extra.Price;
+                            <tr>
+                                <td>@extra.Name.ToUpper()</td>
+                                <td class="text-right">$ @extra.Price</td>
+                            </tr>
+                            }
+                            }
+                            
+                            @foreach (Tax t in @ViewBag.taxes)
+                            {
+                                <tr>
+                                    <td>@t.Name.ToUpper()</td>
+                                    <td class="text-right">% @t.Percentage</td>
+                                </tr>
+                                total += subtotal * (t.Percentage / 100);
+                                
+                            }
+                            <tr>
+                                <td class="bg-warning"><b>TOTAL WITH TAX</b></td>
+                                <td class="text-right bg-warning"><b>$ @total</b></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <a class="btn btn-primary center-block" href="/order/menu">Edit Your Order</a>
+
+                    <h3 class="sb-title">ORDER DETAILS</h3>
+
+                   
+                    <table class="table table-hover ">
+                        <thead>
+                            @foreach (Items Items in Model)
+                            {
+                              
+                                <tr>
+                                    <th>@Items.Name</th>
+                                    <th>x @Items.Quantitity</th>
+                                    <th class="text-right">$ @Items.price</th>
+                                </tr>
+                            }
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="bg-warning"><b>ORDER TOTAL</b></td>
+                                <td class="text-right bg-warning"><b>$ @subtotal</b></td>
+                            </tr>
+
+                        </tbody>
+
+                      
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* Ingredients Modal *@
+
+
+
+
+
+<script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
+
+<!-- Load the client component. -->
+<script src="https://js.braintreegateway.com/web/3.14.0/js/client.min.js"></script>
+
+<!-- Load the PayPal Checkout component. -->
+<script src="https://js.braintreegateway.com/web/3.14.0/js/paypal-checkout.min.js"></script>
+<div id="paypal-button"></div>
+
+
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.14.0/js/client.min.js"></script>
+
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.14.0/js/hosted-fields.min.js"></script>
+
+
+
+<script src="https://js.braintreegateway.com/js/braintree-2.32.0.min.js"></script>
+
+<script>
+    function onChange()
+    {
+       
+        var d = document.getElementById("timeSelect");
+        var e = document.getElementById("select_id").value;
+      
+        d.value = e;
+        alert(d.value);
+        }
+    braintree.setup('@System.Web.HttpContext.Current.Session["token"]', "dropin", {
+        amount:100,
+        container: "payment-form"
+    });
+</script>
