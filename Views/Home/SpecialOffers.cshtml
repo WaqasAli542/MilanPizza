@@ -53,7 +53,7 @@
                         {
                             <tr>
                                 <td><h3 class="m0"><a data-toggle="modal" data-id=@specialOffer.Id title="Add this item" class="open-FoodItem btn" href="#SpecialOfferDialog"> @specialOffer.Name <small>@specialOffer.Description</small></a> </h3></td>
-                                <td class="price text-right">$@specialOffer.Price</td>
+                                <td class="price text-right">£@specialOffer.Price</td>
                             </tr>
 
                         }
@@ -126,7 +126,7 @@
                         var $price = $("#btnsubmit");
                         name = response.Name;
                         $el.empty(); // remove old options
-                        $el.append($("<h3 class='modal-title' id='myModalLabel'>" + response.Name + "<span class='pull-right'> $" + amount + "</span></h3> <p hidden id='mob'>" + response.Name + ',' + amount + "</p>"))
+                        $el.append($("<h3 class='modal-title' id='myModalLabel'>" + response.Name + "<span class='pull-right'> £" + amount + "</span></h3> <p hidden id='mob'>" + response.Name + ',' + amount + "</p>"))
                         $price.removeAttr("data-price")
                         $price.attr("data-price", amount)
 
@@ -193,7 +193,7 @@
 
                         $.each(response, function (value, key) {
 
-                            $el.append($("<tr> <td width='50%'><input onclick='handleClick(this);' id='" + parseInt(key.AddOn.Id) + "' type='checkbox' name= '" + key.AddOn.Price + "' value='" + key.AddOn.Price + "'>  <label id= 'kdf' name='" + key.AddOn.Name + " value='" + key.AddOn.Price + "'>" + key.AddOn.Name + "</label><p type='text' id='" + parseInt(key.AddOn.Id) + "' hidden >" + key.AddOn.Name + ',' + key.AddOn.Price + " </p> <span class='pull-right'>  $ " + key.AddOn.Price + "</span></td></tr>"))
+                            $el.append($("<tr> <td width='50%'><input onclick='handleClick(this);' id='" + parseInt(key.AddOn.Id) + "' type='checkbox' name= '" + key.AddOn.Price + "' value='" + key.AddOn.Price + "'>  <label id= 'kdf' name='" + key.AddOn.Name + " value='" + key.AddOn.Price + "'>" + key.AddOn.Name + "</label><p type='text' id='" + parseInt(key.AddOn.Id) + "' hidden >" + key.AddOn.Name + ',' + key.AddOn.Price + " </p> <span class='pull-right'>  £ " + key.AddOn.Price + "</span></td></tr>"))
 
                         });
                     },
@@ -241,7 +241,7 @@
                             <td width="50%">
                                 <input id="checkbox3" type="checkbox" name="" value="3">
                                 <label>SMALL CLASSIC FRY</label>
-                                <span class="pull-right"> $0.92</span>
+                                <span class="pull-right"> £0.92</span>
                             </td>
                             <td width="50%">
                                 <input id="checkbox3" type="checkbox" name="" value="3">
@@ -294,7 +294,7 @@
                 </ul>
             </div>
             <footer>
-                <a href="/Home/Check_Out" class="checkout btn"><em>Checkout - $<span>0</span></em></a>
+                <a href="/Home/Check_Out" class="checkout btn"><em>Checkout - £<span>0</span></em></a>
             </footer>
 
         </div>

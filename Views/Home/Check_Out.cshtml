@@ -116,17 +116,14 @@
                         <div class="form-group mb30">
                             <input type="text" name="PostCode" id="signup-email-confirm" class="form-control" placeholder="PostCode" value="" required>
                         </div>
-                        <div class="form-group mb30">
-                            <input type="email" name="email_confirm" id="signup-email-confirm" class="form-control" placeholder="company" value="" required>
-                            <span class="text-muted">Optional, but this tends to be very helpful, especially if you're ordering from work.</span>
-                        </div>
+                       
                         <div class="form-group mb30">
                             <textarea class="form-control" name="Instructions" rows="3" cols="5" placeholder=" delivery instructions"></textarea>
                         </div>
                       
 
-                          <input type="password" name="password" id="signup-password" class="form-control" placeholder="password" hidden>
-
+                          <input type="hidden" name="password" id="signup-password" class="form-control" placeholder="password" >
+                          <br />
                            <div id="payment-form"></div>
 
                         <div class="row">
@@ -230,7 +227,7 @@
                         <tbody>
                             <tr>
                                 <td>ORDER TOTAL</td>
-                                <td class="text-right">$ @subtotal</td>
+                                <td class="text-right">£ @subtotal</td>
                             </tr>
                            
 
@@ -241,7 +238,7 @@
                                     total += extra.Price;
                             <tr>
                                 <td>@extra.Name.ToUpper()</td>
-                                <td class="text-right">$ @extra.Price</td>
+                                <td class="text-right">£ @extra.Price</td>
                             </tr>
                             }
                             }
@@ -257,7 +254,7 @@
                             }
                             <tr>
                                 <td class="bg-warning"><b>TOTAL WITH TAX</b></td>
-                                <td class="text-right bg-warning"><b>$ @total</b></td>
+                                <td class="text-right bg-warning"><b>£ @total</b></td>
                             </tr>
 
                         </tbody>
@@ -278,14 +275,14 @@
                                 <tr>
                                     <th>@Items.Name</th>
                                     <th>x @Items.Quantitity</th>
-                                    <th class="text-right">$ @Items.price</th>
+                                    <th class="text-right">£ @Items.price</th>
                                 </tr>
                             }
                         </thead>
                         <tbody>
                             <tr>
                                 <td colspan="2" class="bg-warning"><b>ORDER TOTAL</b></td>
-                                <td class="text-right bg-warning"><b>$ @subtotal</b></td>
+                                <td class="text-right bg-warning"><b>£ @subtotal</b></td>
                             </tr>
 
                         </tbody>

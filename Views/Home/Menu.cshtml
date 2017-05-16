@@ -91,7 +91,7 @@ else
                                                     </h3>
                                                 </td>
                                             
-                                                <td class="price text-right">$ @fItem.Price</td>
+                                                <td class="price text-right">£ @fItem.Price</td>
                                             </tr>
                                         }
 
@@ -149,7 +149,7 @@ else
                         var $price = $("#btnsubmit");
                         name = response.Size+"-"+ response.Food.Name;
                         $el.empty(); // remove  old options
-                        $el.append($("<h3 class='modal-title' id='myModalLabel'>" + response.Size + "<span class='pull-right'> $" + amount + "</span></h3> <p hidden id='mob'>" + response.Size + "-" + response.Food.Name + ',' + amount + "</p>"))
+                        $el.append($("<h3 class='modal-title' id='myModalLabel'>" + response.Size + "<span class='pull-right'> £" + amount + "</span></h3> <p hidden id='mob'>" + response.Size + "-" + response.Food.Name + ',' + amount + "</p>"))
                         $price.removeAttr("data-price") 
                         $price.attr("data-price", amount)
                     },
@@ -172,7 +172,7 @@ else
                         
                         $.each(response, function (value, key) {
                          
-                            $el.append($("<tr> <td width='50%'><input onclick='handleClick(this);' id='"+key.Id+ "' type='checkbox' name= '" + key.Price + "' value='" + key.Price + "'>  <label id= 'kdf' name='" + key.Name + " value='" + key.Price + "'>" + key.Name + "</label><p type='text' id='" + key.Id + "' hidden >" + key.Name + '                   ' + key.Price + " </p> <span class='pull-right'>  $ " + key.Price + "</span></td></tr>"))
+                            $el.append($("<tr> <td width='50%'><input onclick='handleClick(this);' id='"+key.Id+ "' type='checkbox' name= '" + key.Price + "' value='" + key.Price + "'>  <label id= 'kdf' name='" + key.Name + " value='" + key.Price + "'>" + key.Name + "</label><p type='text' id='" + key.Id + "' hidden >" + key.Name + '                   ' + key.Price + " </p> <span class='pull-right'>  £ " + key.Price + "</span></td></tr>"))
 
                         });
                     },
@@ -259,7 +259,7 @@ else
                 </ul>
             </div>
             <footer>
-                <a href="/Home/Check_Out" class="checkout btn"><em>Checkout - $<span>0</span></em></a>
+                <a href="/Home/Check_Out" class="checkout btn"><em>Checkout - £<span>0</span></em></a>
             </footer>
 
         </div>
