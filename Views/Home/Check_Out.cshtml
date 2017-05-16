@@ -161,13 +161,10 @@
                     <h3 class="sb-title">ORDER SUMMARY</h3>
                     <table class="table table-hover ">
                         <tbody>
-                            <tr>
-                                <td>LOCATION</td>
-                                <td class="text-right"><a href="#">Hell's Kitchen</a></td>
-                            </tr>
+                           
                             <tr>
                                 <td>ORDER TYPE</td>
-                                <td class="text-right">Pick-Up</td>
+                                <td class="text-right">Delivery</td>
                             </tr>
                             <tr>
                                 <td>PICK-UP TIME</td>
@@ -335,7 +332,7 @@
         var e = document.getElementById("select_id").value;
       
         d.value = e;
-        alert(d.value);
+
         }
     braintree.setup('@System.Web.HttpContext.Current.Session["token"]', "dropin", {
         amount:100,

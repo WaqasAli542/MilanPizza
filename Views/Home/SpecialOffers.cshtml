@@ -93,11 +93,11 @@
 
                 if (cb.checked) {
                     addons = addons + cb.id + ",";
-                    amount = amount + parseInt(cb.value);
+                    amount = amount + parseFloat(cb.value);
                 }
                 else {
                     addons = addons.replace(cb.id + ",", "");
-                    amount = amount - parseInt(cb.value);
+                    amount = amount - parseFloat(cb.value);
                 }
                 document.getElementById("mob").innerHTML = name + ',' + amount + "," + "addon" + "," + addons + "foodtype" + "," + specialofferitem;
                
@@ -121,7 +121,7 @@
                     contentType: "application/json; charset=utf-8",
                     data: { SpecialOfferID: specialOfferID },
                     success: function (response) {
-                        amount = parseInt(response.Price);
+                        amount = parseFloat(response.Price);
                         var $el = $("#SpecialOfferDescription");
                         var $price = $("#btnsubmit");
                         name = response.Name;
@@ -152,7 +152,7 @@
                         $el.empty(); // remove old options
                        
                                
-                            quantity = parseInt(response[0].Quantity);
+                            quantity = parseFloat(response[0].Quantity);
                      
                             for(var i=0;i<quantity;i++)
                             {

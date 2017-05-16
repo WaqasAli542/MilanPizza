@@ -121,15 +121,15 @@ else
                 if (cb.checked)
                 {
                     addons = addons + cb.id + ",";
-                    amount = amount + parseInt(cb.value); 
+                    amount = amount + parseFloat(cb.value); 
                 }
                 else
                 {
                    addons= addons.replace(cb.id + ",", "");
-                    amount = amount - parseInt(cb.value);
+                    amount = amount - parseFloat(cb.value);
                 }
                 document.getElementById("mob").innerHTML = name + ',' + amount + "," + "addon" + "," + addons;
-                 alert(amount);
+              
                 $(cb).change(function () {
                     //do something when the user clicks the box   
                 });
@@ -144,7 +144,7 @@ else
                     contentType: "application/json; charset=utf-8",
                     data: { foodItemID: FoodItemId },
                     success: function (response) {
-                        amount = parseInt(response.Price);
+                        amount = parseFloat(response.Price);
                         var $el = $("#Fooddescription");
                         var $price = $("#btnsubmit");
                         name = response.Size+"-"+ response.Food.Name;
@@ -153,7 +153,7 @@ else
                         $price.removeAttr("data-price") 
                         $price.attr("data-price", amount)
                     },
-                    error: function (response) { alert(response); }
+                    error: function (response) {; }
 
                 });
 

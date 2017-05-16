@@ -111,7 +111,7 @@ jQuery(document).ready(function ($) {
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: 'http://localhost:11632/Home/AddItems?',
+            url: 'http://millanpizza.apphb.com/Home/AddItems?',
             contentType: "application/json; charset=utf-8",
             data: { name: sp[0], price: sp[1] , addon: addons , fitem: foodtype },
             success: function (response) {
@@ -126,7 +126,7 @@ jQuery(document).ready(function ($) {
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: 'http://localhost:11632/Home/getItems?',
+            url: 'http://millanpizza.apphb.com/Home/getItems?',
             contentType: "application/json; charset=utf-8",
             data: { Test: "mob" },
             success: function (response) {
@@ -184,7 +184,7 @@ jQuery(document).ready(function ($) {
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: 'http://localhost:11632/Home/DeleteItem?',
+            url: 'http://millanpizza.apphb.com/Home/DeleteItem?',
             contentType: "application/json; charset=utf-8",
             data: { name: s[0] },
             success: function (response) {
@@ -213,7 +213,7 @@ jQuery(document).ready(function ($) {
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: 'http://localhost:11632/Home/UpdateItemQuantities?',
+            url: 'http://millanpizza.apphb.com/Home/UpdateItemQuantities?',
             contentType: "application/json; charset=utf-8",
             data: { Quantities: quantities },
             success: function (response) {
