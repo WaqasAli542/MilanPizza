@@ -26,7 +26,7 @@
     {
         <form id="checkout" method="post" action="payment">
 
-            <h3>PICK-UP DETAILS</h3>
+            <h3>DELIVERY DETAILS</h3>
             <div class="form-group mb30">
                 <input type="text" name="first_name" id="signup-first-name" class="form-control" placeholder="first name" value="" required>
             </div>
@@ -75,7 +75,8 @@
                     <div class="col-sm-12">
                         <div class="form-group mb30">
                             <button id="submit-button" class="btn btn-primary" type="submit" data-modal="modal-updating" value="">Submit Your Order</button>
-                        </div>
+                            <br /><p id="notDeliveryTime" hidden style="color:red;">We cannot deliver at that time</p>
+                            </div>
                     </div>
                 </div>
         
@@ -92,7 +93,7 @@
                             
                             }
                         <input type="hidden" name="id" value="@cus.Id" />
-                        <h3>PICK-UP DETAILS</h3>
+                        <h3>DELIVERY DETAILS</h3>
                         <div class="form-group mb30">
                             <input type="text" name="FirstName" id="signup-first-name" class="form-control" placeholder="first name" value="@cus.FirstName" required>
                         </div>
@@ -130,6 +131,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group mb30">
                                     <button id="submit-button" class="btn btn-primary" type="submit" data-modal="modal-updating" value="">Submit Your Order</button>
+                                    <br /><p id="notDeliveryTime" hidden style="color:red;">We cannot deliver at that time</p>
                                 </div>
                             </div>
                         </div>
@@ -164,7 +166,7 @@
                                 <td class="text-right">Delivery</td>
                             </tr>
                             <tr>
-                                <td>PICK-UP TIME</td>
+                                <td>DELIVERY TIME</td>
                                 <td class="text-right">
                                     <select class="form-control h20" onchange="onChange()" id="select_id">
                                         <option value="asap">ASAP</option>
@@ -329,6 +331,42 @@
         var e = document.getElementById("select_id").value;
       
         d.value = e;
+
+        var newDate = new Date();
+      
+    
+        if (e == "asap") {
+            var obj = document.getElementById("submit-button");
+            obj.disabled = false;
+            var deliveryTime = document.getElementById("notDeliveryTime");
+            deliveryTime.hidden = true;
+        }
+        else {
+            var c = e.split(':');
+
+            var minutesInOrder = parseInt(c[0]) * 60 + parseInt(c[1]);
+            var minutesNow = parseInt(newDate.getHours()) * 60 + parseInt(newDate.getMinutes());
+            if ((minutesInOrder - minutesNow) < 0) {
+                var obj = document.getElementById("submit-button");
+                obj.disabled = true;
+                var deliveryTime = document.getElementById("notDeliveryTime");
+                deliveryTime.hidden = false;
+                deliveryTime.textContent = "Your given time has already passed. Please select some other time";
+            }
+            else if ((minutesInOrder - minutesNow) < 30) {
+                var obj = document.getElementById("submit-button");
+                obj.disabled = true;
+                var deliveryTime = document.getElementById("notDeliveryTime");
+                deliveryTime.hidden = false;
+                deliveryTime.textContent = "We cannot deliver too soon";
+            }
+            else {
+                var obj = document.getElementById("submit-button");
+                obj.disabled = false;
+                var deliveryTime = document.getElementById("notDeliveryTime");
+                deliveryTime.hidden = true;
+            }
+        }
 
         }
     braintree.setup('@System.Web.HttpContext.Current.Session["token"]', "dropin", {

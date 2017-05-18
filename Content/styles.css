@@ -331,9 +331,7 @@ footer {
 }
 .menu-category {
 	border-bottom: 4px solid #F4E38B;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
+
 	float: left;
 	width: 100%;
 }
@@ -361,10 +359,10 @@ footer {
 	margin: 0px !important;
 }
 .menu-category table tr td {
-	padding: 5px;
+	padding: 1px;
 }
 .menu-category table tr td h3 {
-	font-size: 24px;
+	font-size: 0px;
 }
 .menu-category table tr td.price {
 	font-size: 24px !important;
