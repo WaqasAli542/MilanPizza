@@ -33,8 +33,10 @@
             <div class="form-group mb30">
                 <input type="text" name="last_name" id="signup-last-name" class="form-control" placeholder="last name" value="" required>
             </div>
+            <label hidden id="notvalid" style="color:red;">Sorry! Email is not available</label>
+            <label hidden id="valid" style="color:green;">Congragulation! Email is available</label>
             <div class="form-group mb30">
-                <input type="email" name="email" id="signup-email" class="form-control" placeholder="email address" value="" required>
+                <input type="email" name="email" id="email" onchange="validateEmail()" class="form-control" placeholder="email address" value="" required>
                 <span class="text-muted">This is where your confirmation email / receipt will be sent.</span>
             </div>
           
@@ -49,7 +51,7 @@
                 <input type="text" name="PostCode" id="signup-email-confirm" class="form-control" placeholder="PostCode" value="" required>
             </div>
             <div class="form-group mb30">
-                <input type="text" name="email_confirm" id="signup-email-confirm" class="form-control" placeholder="company" value="" >
+                <input type="text" name="Company" id="signup-email-confirm" class="form-control" placeholder="company" value="" >
                 <span class="text-muted">Optional, but this tends to be very helpful, especially if you're ordering from work.</span>
             </div>
             <div class="form-group mb30">
@@ -97,7 +99,7 @@
                             <input type="text" name="last_name" id="signup-last-name" class="form-control" placeholder="last name" value="@cus.LastName" required>
                         </div>
                         <div class="form-group mb30">
-                            <input type="email" name="email" id="signup-email" class="form-control" placeholder="email address" value="@cus.Email" required>
+                            <input type="email" name="email"  id="email" class="form-control" placeholder="email address" value="@cus.Email" required>
                             <span class="text-muted">This is where your confirmation email / receipt will be sent.</span>
                         </div>
 
@@ -316,7 +318,37 @@
 
 <script src="https://js.braintreegateway.com/js/braintree-2.32.0.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
+
+    function validateEmail() {
+        var email = document.getElementById('email').value;
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: '@Url.Action("validateEmail", "Home")',
+            contentType: "application/json; charset=utf-8",
+            data: { Email: email },
+            success: function (response) {
+                if (response) {
+                    $("#notvalid").show();
+                    $("#valid").hide();
+                    $(':input[type="submit"]').prop('disabled', true);
+                } else {
+                    $("#valid").show();
+                    $("#notvalid").hide();
+                    $(':input[type="submit"]').prop('disabled', false);
+
+                }
+
+            },
+            error: function (response) {; }
+
+        });
+
+    }
     window.onload=function()
     {
         onChange();
@@ -438,4 +470,6 @@
         amount:100,
         container: "payment-form"
     });
+
+    
 </script>
